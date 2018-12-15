@@ -96,6 +96,7 @@ class PageDemo extends Component {
         <PanoramaList {...{
             liveTourID,
             panoramaList,
+            onIndexChange: this.handleIndexChange
         }} />
       </div>
     );

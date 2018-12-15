@@ -1,33 +1,92 @@
 @import "~styles/base";
 
+$size: 30px;
+
+.arrow {
+  border: solid #fff;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  &.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+  }
+}
+
 .panorama-list {
-  bottom: 0;
+  bottom: -156px;
   width: 100%;
   color: $green;
   padding: 20px 0;
   position: absolute;
-  overflow-x: auto;
-  background-color: rgba(#000, .8);
-  li {
-    margin: 0 10px;
-    display: inline;
-    white-space: nowrap;
-    .panorama {
-      width: 160px;
-      text-align: center;
-      display: inline-block;
-      text-decoration: none;
-      .image {
-        width: 160px;
-        height: 98px;
-        display: inline-block;
-        border: 5px solid #fff;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
+  background-color: rgba($gray, .8);
+  transition: bottom .3s ease-in-out;
+  &.isOpen {
+    bottom: 0;
+    .toggle {
+      &:after {
+        top: 14px;
+        left: calc(50% - 2px);
+        transform: rotate(45deg) translateX(-50%);
       }
-      .category {
-        color: #fff;
+    }
+  }
+
+  .toggle {
+    left: 50%;
+    top: -$size;
+    width: 50px;
+    height: 30px;
+    cursor: pointer;
+    position: absolute;
+    &:before, &:after {
+      left: 50%;
+      content: '';
+      position: absolute;
+      transform: translateX(-50%);
+    }
+    &:before {
+      display: block;
+      width: $size * 2;
+      height: $size;
+      background-color: rgba($gray, .8);
+      border-top-left-radius: $size * 2;
+      border-top-right-radius: $size * 2;
+    }
+    &:after {
+      top: 11px;
+      padding: 3px;
+      left: calc(50% - 7px);
+      border: solid #fff;
+      border-width: 0 3px 3px 0;
+      display: inline-block;
+      transform: rotate(-135deg) translateX(-50%);
+    }
+  }
+
+  ul {
+    overflow-x: auto;
+    li {
+      margin: 0 10px;
+      display: inline;
+      white-space: nowrap;
+      .panorama {
+        width: 160px;
+        text-align: center;
+        display: inline-block;
+        text-decoration: none;
+        .image {
+          width: 160px;
+          height: 98px;
+          display: inline-block;
+          border: 5px solid #fff;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+        .category {
+          color: #fff;
+        }
       }
     }
   }
