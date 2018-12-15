@@ -1,3 +1,11 @@
+@import "~styles/base";
+
 .page-about {
-  background-color: yellow;
+  .hero {
+    @include hero;
+  }
+  .container {
+    color: $gray;
+    line-height: 1.5rem;
+  }
 }

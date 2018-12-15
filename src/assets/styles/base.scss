@@ -1,0 +1,16 @@
+@import "../../../node_modules/bootstrap-4-grid/scss/grid";
+@import "./color";
+@import "./thumbnail";
+@mixin hero() {
+  height: 200px;
+  display: flex;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(to bottom right, $dark-green, #c5c542);
+}
+
+.border-radius {
+  border-radius: 3px;
+}

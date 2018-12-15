@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styles from './NoMatch.scss';
+import './NoMatch.scss';
 
 class PageNoMatch extends Component {
   static propTypes = {
