@@ -1,0 +1,34 @@
+@import "~styles/base";
+
+.panorama-list {
+  bottom: 0;
+  width: 100%;
+  color: $green;
+  padding: 20px 0;
+  position: absolute;
+  overflow-x: auto;
+  background-color: rgba(#000, .8);
+  li {
+    margin: 0 10px;
+    display: inline;
+    white-space: nowrap;
+    .panorama {
+      width: 160px;
+      text-align: center;
+      display: inline-block;
+      text-decoration: none;
+      .image {
+        width: 160px;
+        height: 98px;
+        display: inline-block;
+        border: 5px solid #fff;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      .category {
+        color: #fff;
+      }
+    }
+  }
+}

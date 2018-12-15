@@ -1,3 +1,19 @@
+@import "~styles/base";
+
 .header {
-  background-color: lightgreen;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  background-color: $gray;
+  ul li {
+    display: inline;
+    margin: 0 10px;
+    a {
+      color: #fff;
+      text-decoration: none;
+      &:hover {
+        color: $green;
+      }
+    }
+  }
 }

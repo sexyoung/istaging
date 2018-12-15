@@ -1,3 +1,71 @@
+@import "~styles/base";
+
 .page-home {
-  background-color: pink;
+  .hero {
+    @include hero;
+  }
+
+  .live-tour {
+    margin: 10px 0;
+    position: relative;
+    overflow: hidden;
+    &:hover {
+      &:after {
+        top: 50%;
+        left: 50%;
+        color: #fff;
+        font-size: 1.5rem;
+        padding: 5px 10px;
+        display: block;
+        content: 'Enter';
+        border-radius: 3px;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        background-image: linear-gradient(to bottom right, darken($dark-green, 20%), darken(#c5c542, 10%));
+      }
+      .thumbnail {
+        position: relative;
+        filter: blur(5px);
+        transition: filter .25s;
+        &:before {
+          position: absolute;
+          content: '';
+          display: block;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(#000, .2);
+        }
+      }
+      .name{
+        transform: translateY(0);
+      }
+    }
+    .thumbnail {
+      height: 200px;
+    }
+    .name {
+      left: 0;
+      right: 0;
+      bottom: 0;
+      transform: translateY(100%);
+      color: #fff;
+      width: 100%;
+      padding: 10px;
+      display: block;
+      position: absolute;
+      background-color: rgba(#000, .7);
+      transition: transform .25s;
+    }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .page-home {
+    .live-tour {
+      height: 200px;
+      .name {
+        transform: translateY(0);
+      }
+    }
+  }
 }

@@ -1,60 +1,103 @@
 import 'aframe';
-import 'firebase/database';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {Entity, Scene} from 'aframe-react';
-import firebase from 'firebase/app';
-import './Demo.scss';
-import PropTypes from 'prop-types';
 
-// const liveTourId = 'eb24b5d8-0155-40fa-aeba-9f6edde1ac4d';
+import firebase from './firebase';
+
+import PanoramaList from './components/PanoramaList';
+
+import './Demo.scss';
+
+const formatPanorama = panoramaList => {
+  console.warn(panoramaList);
+  const list = Array(Object.keys(panoramaList).length);
+  let item = {}
+  Object.keys(panoramaList).forEach(key => {
+    item = (({
+      index,
+      category,
+      thumbnail,
+      desktopUrl,
+    }) => ({
+      index,
+      category,
+      thumbnail,
+      desktopUrl,
+    }))(panoramaList[key].data);
+    list[item.index] = item;
+  });
+  return list;
+}
 
 class PageDemo extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-  };
-
-  state = {
-    selectKey: '',
-    panoramaList: {},
-  };
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      loaded: false,
+      panoramaList: [],
+      selectIndex: props.match.params.index,
+    }
+
+    this.fetchPanoramas = firebase
+      .database()
+      .ref('/panoramas')
+      .orderByChild('Building')
+      .equalTo(props.match.params.liveTourID);
   }
 
   componentDidMount() {
-    // const VRCamFirebase = firebase.initializeApp({
-      // databaseURL: 'https://vr-cam-161603.firebaseio.com',
-      // serviceAccount: require('./data/serviceAccountKey.json')
-    // });
-//
-    // const fetchPanoramas = VRCamFirebase.database().ref('/panoramas').orderByChild('Building').equalTo(liveTourId)
-    // fetchPanoramas.once('value', snapshot => {
-      // const panoramaList = snapshot.val();
-      // console.warn(panoramaList);
-      // this.setState({
-        // selectKey: Object.keys(panoramaList)[0],
-        // panoramaList: Object.keys(panoramaList).reduce((obj, key) => ({
-          // ...obj,
-          // [key]: panoramaList[key].data,
-        // }), {})
-      // });
-    // });
 
+    this.fetchPanoramas.once('value', snapshot => {
+      const panoramaList = formatPanorama(snapshot.val());
+      this.setState({
+        panoramaList,
+        selectIndex: this.props.match.params.index || 0,
+      });
+    });
+  }
+
+  componentWillUnmount() {
+    document.getElementsByTagName('html')[0].classList.remove('a-html');
+    document.getElementsByTagName('body')[0].classList.remove('a-body');
+  }
+
+  handleIndexChange = selectIndex => {
+    this.setState({ selectIndex });
   }
 
   render() {
-    const { selectKey, panoramaList } = this.state;
-    const panorama = selectKey && panoramaList[selectKey].desktopUrl;
+    const {
+      state: {
+        selectIndex,
+        panoramaList,
+      },
+      props: { match: { params: {
+        liveTourID,
+      } } }
+    } = this;
+    const panorama = (selectIndex !== undefined &&
+      panoramaList.length &&
+      panoramaList[selectIndex].desktopUrl
+    );
+    if(!panorama) return null;
     return (
-      <Scene>
-        <Entity primitive='a-text' value='Hello, WebVR!'  color="#111" position="0 2.5 -2" align="center"/>
-        {panorama &&
-          <Entity primitive='a-sky' src={panorama}/>
-        }
-        <Entity primitive="a-camera"  />
-      </Scene>
+      <div className="page-demo">
+        <Scene>
+          <Entity
+            src={panorama}
+            primitive='a-sky'
+            ref={elem => this.sky = elem}>
+          </Entity>
+          <Entity primitive="a-camera" />
+        </Scene>
+        <PanoramaList {...{
+            liveTourID,
+            panoramaList,
+        }} />
+      </div>
     );
   }
 }

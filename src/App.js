@@ -1,9 +1,5 @@
-import 'aframe';
-import {Entity, Scene} from 'aframe-react';
 import React, { Component } from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
-import firebase from 'firebase/app';
-import 'firebase/database';
 import './App.scss';
 
 import Header from 'components/Header';
@@ -26,7 +22,7 @@ class App extends Component {
             location.pathname.indexOf('/demo') ? <Header />: null
           }/>
           <Switch>
-            <Route path="/demo/:liveTourID" component={Demo}/>
+            <Route path="/demo/:liveTourID/:index?" component={Demo}/>
             <Route exact path="/" component={Home}/>
             <Route exact path="/about" component={About}/>
             <Route component={NoMatch}/>

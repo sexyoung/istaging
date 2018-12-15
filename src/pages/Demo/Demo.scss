@@ -1,3 +1,30 @@
+@import "~styles/base";
+
+.a-body {
+  #root {
+    height: 100%;
+    &>.app {
+      height: 100%;
+    }
+  }
+}
+
+.loading {
+  top: 0;
+  left: 0;
+  color: #fff;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  font-size: 2.5rem;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(to bottom right, $dark-green, #c5c542);
+}
+
 .page-demo {
+  height: 100%;
+  position: relative;
   background-color: #999;
 }
