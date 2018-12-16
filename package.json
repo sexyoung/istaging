@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "aframe": "^0.8.2",
+    "aframe-animation-component": "^5.1.2",
     "aframe-react": "^4.4.0",
     "bootstrap-4-grid": "^2.4.1",
     "classnames": "^2.2.6",

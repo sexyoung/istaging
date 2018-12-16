@@ -20,11 +20,6 @@
     "id": "362db1f2-d63c-4cc8-bc4c-5dd02fb78339"
   },
   {
-    "name": "The Mall Casa",
-    "className": "casa",
-    "id": "57f3ab8c816dfa005692ccfc"
-  },
-  {
     "name": "Rue Cavalotti",
     "className": "cavalotti",
     "id": "314525e3-6ae5-43a2-8588-3e2da0011b53"
@@ -97,7 +92,7 @@
   {
     "name": "Moon",
     "className": "moon",
-    "id": "58217f61a22b9d0067e06d7c?ui=true"
+    "id": "58217f61a22b9d0067e06d7c"
   },
   {
     "name": "Paris landmarks",

@@ -40,6 +40,7 @@ $size: 30px;
     height: 30px;
     cursor: pointer;
     position: absolute;
+    transform: translateX(-50%);
     &:before, &:after {
       left: 50%;
       content: '';
@@ -87,6 +88,12 @@ $size: 30px;
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
+          &:hover {
+            border-color: lighten($green, 20%);
+          }
+          &.actived {
+            border-color: darken($green, 15%);
+          }
         }
         .category {
           color: #fff;

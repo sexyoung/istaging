@@ -17,19 +17,27 @@ class PanoramaList extends Component {
   }
 
   render () {
-    const { isOpen } = this.state;
+    const {
+      state: { isOpen },
+      props: {
+        liveTourID,
+        selectIndex,
+        panoramaList,
+        onIndexChange,
+      }
+    } = this;
     return (
       <div className={cx("panorama-list", { isOpen })}>
         <div className="toggle" onClick={this.handleToggle} />
         <ul>
-          {this.props.panoramaList.map((panorama, key) =>
+          {panoramaList.map((panorama, key) =>
             <li key={key}>
               <Link
                 className="panorama"
-                onClick={() => this.props.onIndexChange(panorama.index)}
-                to={`/demo/${this.props.liveTourID}/${panorama.index}`}>
+                onClick={() => onIndexChange(panorama.index)}
+                to={`/demo/${liveTourID}/${panorama.index}`}>
                 <div
-                  className="image"
+                  className={cx("image", { actived: selectIndex === key })}
                   style={{
                     backgroundImage: `url(${panorama.thumbnail})`
                   }}
@@ -46,6 +54,7 @@ class PanoramaList extends Component {
 
 PanoramaList.propTypes = {
   liveTourID: PropTypes.string,
+  selectIndex: PropTypes.number,
   panoramaList: PropTypes.array,
   onIndexChange: PropTypes.func,
 }

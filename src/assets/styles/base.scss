@@ -9,6 +9,9 @@
   align-items: center;
   justify-content: center;
   background-image: linear-gradient(to bottom right, $dark-green, #c5c542);
+  @include media-breakpoint-down(sm) {
+    font-size: 1.5rem;
+  }
 }
 
 .border-radius {
